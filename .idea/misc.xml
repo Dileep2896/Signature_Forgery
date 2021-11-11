@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.2609375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22780797101449277" />
+        <entry key="app/src/main/res/layout/activity_result.xml" value="0.22418478260869565" />
       </map>
     </option>
   </component>
