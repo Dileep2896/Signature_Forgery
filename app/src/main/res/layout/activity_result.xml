@@ -27,8 +27,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textSize="22sp"
-                android:textColor="@color/white"
-                android:background="@drawable/custom_primary_dark_bg"
+                android:textColor="@color/primaryDark"
                 android:padding="10dp"
                 android:textStyle="bold"/>
 

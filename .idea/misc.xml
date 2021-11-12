@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/custom_accent_bg.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/custom_primaryDark_bg.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/custom_primaryLight_bg.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/custom_primary_bg.xml" value="0.2609375" />

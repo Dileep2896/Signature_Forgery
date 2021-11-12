@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         // Call when image was capture
 
-        if (resultCode == IMAGE_CAPTURE_CODE) {
+        if (requestCode == IMAGE_CAPTURE_CODE && resultCode == RESULT_OK) {
             Log.i("ImageInfo", image_uri.toString());
             ivCameraPicture.setImageURI(image_uri);
 

@@ -121,6 +121,12 @@ public class ResultActivity extends AppCompatActivity {
 
         BarData data = new BarData(barDataSet_fake, barDataSet_real);
 
+        barchartResult.getAxisLeft().setAxisMinimum(0f);
+        barchartResult.getAxisRight().setAxisMinimum(0f);
+
+        barchartResult.getAxisLeft().setAxisMaximum(100f);
+        barchartResult.getAxisRight().setAxisMaximum(100f);
+
         XAxis xAxis = barchartResult.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setGranularityEnabled(true);
