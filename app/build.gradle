@@ -46,4 +46,7 @@ dependencies {
     // The GPU delegate library is optional. Depend on it as needed.
     implementation 'org.tensorflow:tensorflow-lite-gpu:0.0.0-nightly-SNAPSHOT'
     implementation 'org.tensorflow:tensorflow-lite-support:0.0.0-nightly-SNAPSHOT'
+
+    // Graph
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

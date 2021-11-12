@@ -8,10 +8,13 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,7 +38,9 @@ import org.tensorflow.lite.support.label.Category;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,16 +49,18 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
+    public static final int PICK_IMAGE = 1;
 
     Uri image_uri;
 
-    Button capture, btnAnalyse;
+    Button capture, btnAnalyse, btnSelectFromPhone;
     ImageView ivCameraPicture;
 
     List<Category> probability;
 
     float fakeScore, realScore;
 
+    @SuppressLint("IntentReset")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         capture = findViewById(R.id.btnCapture);
         btnAnalyse = findViewById(R.id.btnAnalyse);
+        btnSelectFromPhone = findViewById(R.id.btnSelectFromPhone);
 
         btnAnalyse.setEnabled(false);
         capture.setText("Scan Signature");
@@ -95,6 +103,19 @@ public class MainActivity extends AppCompatActivity {
             analyseSignature();
         });
 
+        btnSelectFromPhone.setOnClickListener(view -> {
+            Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
+            getIntent.setType("image/*");
+
+            @SuppressLint("IntentReset") Intent pickIntent = new Intent(Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            pickIntent.setType("image/*");
+
+            Intent chooserIntent = Intent.createChooser(getIntent, "Select Image");
+            chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
+
+            startActivityForResult(chooserIntent, PICK_IMAGE);
+        });
 
     }
 
@@ -152,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         // Call when image was capture
 
-        if (resultCode == RESULT_OK) {
+        if (resultCode == IMAGE_CAPTURE_CODE) {
             Log.i("ImageInfo", image_uri.toString());
             ivCameraPicture.setImageURI(image_uri);
 
@@ -178,6 +199,38 @@ public class MainActivity extends AppCompatActivity {
 
             } catch (IOException e) {
                 // TODO Handle the exception
+            }
+
+            Log.i("Probability", probability.toString());
+
+            fakeScore = probability.get(0).getScore();
+            realScore = probability.get(1).getScore();
+
+        } else if (requestCode == PICK_IMAGE) {
+
+            assert data != null;
+            Uri selectedImage = data.getData();
+
+            try {
+                Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImage));
+                ivCameraPicture.setImageBitmap(bitmap);
+
+                if (bitmap != null) {
+                    btnAnalyse.setEnabled(true);
+
+                    SignatureForgeryModel model = SignatureForgeryModel.newInstance(getBaseContext());
+                    // Creates inputs for reference.
+                    TensorImage image = TensorImage.fromBitmap(bitmap);
+
+                    // Runs model inference and gets result.
+                    SignatureForgeryModel.Outputs outputs = model.process(image);
+                    probability = outputs.getProbabilityAsCategoryList();
+
+                    // Releases model resources if no longer used.
+                    model.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
             Log.i("Probability", probability.toString());
