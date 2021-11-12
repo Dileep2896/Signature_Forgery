@@ -1,48 +1,39 @@
-package com.hilspade.signatureforgery;
+package com.dileepkumar.signatureforgery;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
+
+import com.dileepkumar.signatureforgery.ml.SignatureForgeryModel;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.Toast;
 
-import com.hilspade.signatureforgery.ml.SignModel;
-import com.hilspade.signatureforgery.ml.SignatureForgeryModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-import org.tensorflow.lite.DataType;
-import org.tensorflow.lite.support.image.ImageProcessor;
 import org.tensorflow.lite.support.image.TensorImage;
-import org.tensorflow.lite.support.image.ops.ResizeOp;
 import org.tensorflow.lite.support.label.Category;
-import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -60,14 +51,15 @@ public class MainActivity extends AppCompatActivity {
 
     float fakeScore, realScore;
 
+    private FirebaseAuth mAuth;
+
     @SuppressLint("IntentReset")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Remove Dark Theme From Android
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        mAuth = FirebaseAuth.getInstance();
 
         capture = findViewById(R.id.btnCapture);
         btnAnalyse = findViewById(R.id.btnAnalyse);
@@ -117,6 +109,34 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(chooserIntent, PICK_IMAGE);
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            String name = currentUser.getDisplayName();
+            Log.i("USER", name);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.side_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.logoutMenu) {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(this, LoginPage.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void analyseSignature() {
@@ -185,7 +205,8 @@ public class MainActivity extends AppCompatActivity {
 
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), image_uri);
 
-                SignatureForgeryModel model = SignatureForgeryModel.newInstance(getBaseContext());
+                SignatureForgeryModel model =
+                        SignatureForgeryModel.newInstance(getBaseContext());
 
                 // Creates inputs for reference.
                 TensorImage image = TensorImage.fromBitmap(bitmap);
@@ -218,7 +239,8 @@ public class MainActivity extends AppCompatActivity {
                 if (bitmap != null) {
                     btnAnalyse.setEnabled(true);
 
-                    SignatureForgeryModel model = SignatureForgeryModel.newInstance(getBaseContext());
+                    SignatureForgeryModel model =
+                            SignatureForgeryModel.newInstance(getBaseContext());
                     // Creates inputs for reference.
                     TensorImage image = TensorImage.fromBitmap(bitmap);
 

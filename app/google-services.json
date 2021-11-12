@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "981660916530",
+    "project_id": "signature-forgery-application",
+    "storage_bucket": "signature-forgery-application.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981660916530:android:7a18737e0ec0177ff4152b",
+        "android_client_info": {
+          "package_name": "com.dileepkumar.signatureforgery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "981660916530-lthmmr92p3abscn9cd95ob3uh7i5k5of.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcxlc_DNVLWXe3EkuZWkFJKm46zyLtLqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "981660916530-lthmmr92p3abscn9cd95ob3uh7i5k5of.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
