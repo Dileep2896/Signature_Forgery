@@ -53,3 +53,5 @@ Login                      |  Registration             |    Main Page           
 * Harsha Vardhan
 * Viyandra
 
+## University
+### Reva University
