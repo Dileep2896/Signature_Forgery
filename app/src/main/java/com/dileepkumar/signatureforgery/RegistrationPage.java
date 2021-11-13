@@ -30,6 +30,8 @@ public class RegistrationPage extends AppCompatActivity {
     TextView tvErrorLog;
     String email, password, re_password, username;
 
+    LoadingDialog loadingDialog;
+
     private final String TAG = "UserRegistration";
 
     @Override
@@ -46,6 +48,8 @@ public class RegistrationPage extends AppCompatActivity {
         tvErrorLog = findViewById(R.id.tvErrorLog);
 
         tvErrorLog.setVisibility(View.GONE);
+
+        loadingDialog = new LoadingDialog(this);
 
     }
 
@@ -77,6 +81,7 @@ public class RegistrationPage extends AppCompatActivity {
         } else {
             tvErrorLog.setVisibility(View.GONE);
             createNewUser(email, password, username);
+            loadingDialog.startLoadingDialog();
         }
 
     }
@@ -98,10 +103,12 @@ public class RegistrationPage extends AppCompatActivity {
                                         Log.d(TAG, "User profile updated.");
                                         goToMainPage();
                                     } else {
+                                        // If failed to save the username
                                         tvErrorLog.setVisibility(View.VISIBLE);
                                         tvErrorLog.setText(Objects.requireNonNull(task1
                                                 .getException()).getMessage());
                                         tvErrorLog.setTextColor(Color.RED);
+                                        loadingDialog.dismissDialog();
                                     }
                                 });
                     } else {
@@ -112,6 +119,7 @@ public class RegistrationPage extends AppCompatActivity {
                         tvErrorLog.setVisibility(View.VISIBLE);
                         tvErrorLog.setText(Objects.requireNonNull(task.getException()).getMessage());
                         tvErrorLog.setTextColor(Color.RED);
+                        loadingDialog.dismissDialog();
                     }
                 });
     }
@@ -119,6 +127,7 @@ public class RegistrationPage extends AppCompatActivity {
     public void goToMainPage() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        loadingDialog.dismissDialog();
     }
 
 }

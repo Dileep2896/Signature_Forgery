@@ -25,6 +25,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button capture, btnAnalyse, btnSelectFromPhone;
     ImageView ivCameraPicture;
+    TextView tvUsernameDisplay;
 
     List<Category> probability;
 
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-    @SuppressLint("IntentReset")
+    @SuppressLint({"IntentReset", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         capture = findViewById(R.id.btnCapture);
         btnAnalyse = findViewById(R.id.btnAnalyse);
         btnSelectFromPhone = findViewById(R.id.btnSelectFromPhone);
+        tvUsernameDisplay = findViewById(R.id.tvUsernameDisplay);
 
         btnAnalyse.setEnabled(false);
         capture.setText("Scan Signature");
@@ -118,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             String name = currentUser.getDisplayName();
+            tvUsernameDisplay.setText("Welcome, " + name);
             Log.i("USER", name);
         }
     }

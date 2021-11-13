@@ -9,12 +9,23 @@
     android:padding="30dp"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/tvUsernameDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_primary_bg"
+        android:text="Welcome, Dileep Kumar Sharma"
+        android:padding="10dp"
+        android:textColor="@color/accent"
+        android:textStyle="bold"/>
+
     <ImageView
         android:id="@+id/ivCameraPicture"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/ic_baseline_image_24"
-        android:layout_weight="5"/>
+        android:layout_weight="6"/>
 
     <Button
         android:id="@+id/btnCapture"
@@ -22,6 +33,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:textStyle="bold"
+        android:layout_marginTop="10dp"
         android:text="Scan Signature"/>
 
     <Button

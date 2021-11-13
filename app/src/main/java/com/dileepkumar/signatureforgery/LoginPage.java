@@ -27,6 +27,8 @@ public class LoginPage extends AppCompatActivity {
     TextView tvNotRegister, tvLoginErrorLog;
     EditText etLoginEmail, etLoginPassword;
 
+    LoadingDialog loadingDialog;
+
     private FirebaseAuth mAuth;
     private final String TAG = "SignInUser";
 
@@ -46,6 +48,8 @@ public class LoginPage extends AppCompatActivity {
         etLoginPassword = findViewById(R.id.etLoginPassword);
 
         tvLoginErrorLog.setVisibility(View.GONE);
+
+        loadingDialog = new LoadingDialog(this);
 
         setTvNotRegister();
 
@@ -81,6 +85,7 @@ public class LoginPage extends AppCompatActivity {
             tvLoginErrorLog.setTextColor(Color.RED);
         } else {
             tvLoginErrorLog.setVisibility(View.GONE);
+            loadingDialog.startLoadingDialog();
             tryToLogin(email, password);
         }
     }
@@ -104,12 +109,14 @@ public class LoginPage extends AppCompatActivity {
                         tvLoginErrorLog.setText(
                                 Objects.requireNonNull(task.getException()).getMessage());
                         tvLoginErrorLog.setTextColor(Color.RED);
+                        loadingDialog.dismissDialog();
                     }
                 });
 
     }
 
     private void goToMainPage() {
+        loadingDialog.dismissDialog();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
