@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../contrast-bootstrap-pro/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../contrast-bootstrap-pro/css/cdb.css" />
+    <link rel="stylesheet" href="signature.css">
+    <script src="../contrast-bootstrap-pro/js/cdb.js"></script>
+    <script src="../contrast-bootstrap-pro/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/9d1d9a82d2.js" crossorigin="anonymous"></script>
+    <title>Result - Signature Detections</title>
+</head>
+<style>
+    .chart-container {
+        width: 50%;
+        height: 50%;
+        margin: auto;
+    }
+</style>
+
+<body>
+    <div class="header">
+        <h1>Signature Forgery Detection</h1>
+    </div>
+    <div class="card chart-container">
+        <canvas id="chart"></canvas>
+    </div>
+    <div "justify-content:center; align-items:center; gap: 7px; flex-direction: column;"><b> The Scanned
+            Signature is</b>
+        <button style="height: 15ps; width: 1000px; background-color: aquamarine; font-size: large;">
+            <b>Original - 94%</b></button>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js">
+</script>
+<script>
+    const ctx = document.getElementById("chart").getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+
+            labels: ["Forgery", "Original"],
+            datasets: [{
+                label: 'Signature Detection',
+                backgroundColor: '#6c9c93',
+                borderColor: 'rgb(47, 128, 237)',
+                data: [6, 94],
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                    }
+                }]
+            }
+        },
+    });
+</script>
+
+
+
+</html>
