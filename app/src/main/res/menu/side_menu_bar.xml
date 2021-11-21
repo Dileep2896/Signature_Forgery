@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item android:id="@+id/userName"
+            android:icon="@drawable/ic_person"
+            android:title="Name" />
+
+        <item android:id="@+id/userEmail"
+            android:icon="@drawable/ic_email"
+            android:title="Email"/>
+
+    </group>
+
+    <group android:checkableBehavior="single">
+
+        <item android:title="Dashboard">
+
+            <menu>
+
+                <item android:id="@+id/cameraConnect"
+                    android:icon="@drawable/ic_camera_link"
+                    android:title="Connect To Camera" />
+
+                <item android:id="@+id/analyseMenu"
+                    android:icon="@drawable/ic_graph"
+                    android:title="Analyse"/>
+
+                <item
+                    android:id="@+id/compareImages"
+                    android:icon="@drawable/ic_compare"
+                    android:title="Compare Images"/>
+
+                <item
+                    android:id="@+id/trainNewImages"
+                    android:icon="@drawable/ic_play"
+                    android:title="Train"/>
+
+                <item android:id="@+id/subscriptions"
+                    android:icon="@drawable/ic_money"
+                    android:title="Subscriptions"/>
+
+                <item
+                    android:id="@+id/faqMenu"
+                    android:icon="@drawable/ic_faq"
+                    android:title="FAQ"/>
+
+            </menu>
+
+        </item>
+
+    </group>
+
+    <group android:checkableBehavior="single">
+
+        <item android:title="User Actions">
+
+            <menu>
+
+            <item android:id="@+id/logout"
+                android:icon="@drawable/ic_logout"
+                android:title="Logout"/>
+
+            </menu>
+
+        </item>
+
+    </group>
+
+</menu>

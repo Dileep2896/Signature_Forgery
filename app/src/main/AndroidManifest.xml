@@ -13,6 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SignatureForgery">
         <activity
+            android:name=".CompareImagesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TrainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Subscriptions"
+            android:exported="false" />
+        <activity
+            android:name=".ConnectToCamera"
+            android:exported="false" />
+        <activity
             android:name=".RegistrationPage"
             android:exported="false" />
         <activity
@@ -20,8 +32,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".LoginPage"
             android:exported="true">

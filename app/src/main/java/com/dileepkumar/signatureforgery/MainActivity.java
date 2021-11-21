@@ -2,8 +2,11 @@ package com.dileepkumar.signatureforgery;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.dileepkumar.signatureforgery.ml.SignatureForgeryModel;
 
@@ -28,6 +31,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -36,8 +40,14 @@ import org.tensorflow.lite.support.label.Category;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+
+    // Side Menu Variables
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Toolbar toolbar;
 
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
@@ -47,13 +57,14 @@ public class MainActivity extends AppCompatActivity {
 
     Button capture, btnAnalyse, btnSelectFromPhone;
     ImageView ivCameraPicture;
-    TextView tvUsernameDisplay;
 
     List<Category> probability;
 
     float fakeScore, realScore;
 
     private FirebaseAuth mAuth;
+
+    String name, email;
 
     @SuppressLint({"IntentReset", "SetTextI18n"})
     @Override
@@ -63,10 +74,15 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        // Side menu variables
+        drawerLayout = findViewById(R.id.drawableLayout);
+        navigationView = findViewById(R.id.navigationSideBar);
+        toolbar = findViewById(R.id.toolBarMain);
+
+        // Page other components
         capture = findViewById(R.id.btnCapture);
         btnAnalyse = findViewById(R.id.btnAnalyse);
         btnSelectFromPhone = findViewById(R.id.btnSelectFromPhone);
-        tvUsernameDisplay = findViewById(R.id.tvUsernameDisplay);
 
         btnAnalyse.setEnabled(false);
         capture.setText("Scan Signature");
@@ -88,10 +104,8 @@ public class MainActivity extends AppCompatActivity {
                     // permission already granted
                     cameraIsAccessed();
                 }
-            } else {
-                // System OS < marshmallow
+            }  // System OS < marshmallow
 
-            }
         });
 
         btnAnalyse.setOnClickListener(view -> {
@@ -114,33 +128,85 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // Implementing side menu bar
+    @SuppressLint("NonConstantResourceId")
+    private void sideMainMenu() {
+
+        Log.i("Email", email);
+        Log.i("Name", name);
+
+        Menu menu = navigationView.getMenu();
+        MenuItem userEmail = menu.findItem(R.id.userEmail);
+        userEmail.setTitle(email);
+
+        MenuItem userName = menu.findItem(R.id.userName);
+        userName.setTitle(name);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.navigation_open, R.string.navigation_close);
+
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(item -> {
+            Intent intent;
+            switch (item.getItemId()) {
+                case R.id.cameraConnect:
+                    intent = new Intent(this, ConnectToCamera.class);
+                    startActivity(intent);
+                    drawerLayout.close();
+                    break;
+                case R.id.analyseMenu:
+                    drawerLayout.close();
+                    break;
+                case R.id.compareImages:
+                    intent = new Intent(this, CompareImagesActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(getBaseContext(), "Compare Images", Toast.LENGTH_SHORT).show();
+                    drawerLayout.close();
+                    break;
+                case R.id.trainNewImages:
+                    intent = new Intent(this, TrainActivity.class);
+                    startActivity(intent);
+                    drawerLayout.close();
+                    break;
+                case R.id.subscriptions:
+                    intent = new Intent(this, Subscriptions.class);
+                    startActivity(intent);
+                    drawerLayout.close();
+                    break;
+                case R.id.faqMenu:
+                    Toast.makeText(getBaseContext(), "FAQ", Toast.LENGTH_SHORT).show();
+                    drawerLayout.close();
+                    break;
+                case R.id.logout:
+                    Toast.makeText(getBaseContext(), "Logout", Toast.LENGTH_SHORT).show();
+                    drawerLayout.close();
+                    FirebaseAuth.getInstance().signOut();
+                    intent = new Intent(this, LoginPage.class);
+                    startActivity(intent);
+                    break;
+                default:
+                    Toast.makeText(getBaseContext(), "No Options", Toast.LENGTH_SHORT).show();
+            }
+            return false;
+        });
+
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            String name = currentUser.getDisplayName();
-            tvUsernameDisplay.setText("Welcome, " + name);
-            Log.i("USER", name);
+            name = currentUser.getDisplayName();
+            email = currentUser.getEmail();
+        } else {
+            name = "No User Name Found";
+            email = "No User Email Found";
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.side_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.logoutMenu) {
-            FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(this, LoginPage.class);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
+        sideMainMenu();
     }
 
     private void analyseSignature() {

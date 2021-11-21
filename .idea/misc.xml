@@ -3,22 +3,35 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../Library/Android/sdk/platforms/android-31/data/res/layout/simple_spinner_dropdown_item.xml" value="0.20380434782608695" />
+        <entry key="../../../../Library/Android/sdk/platforms/android-31/data/res/layout/simple_spinner_item.xml" value="0.20380434782608695" />
         <entry key="app/src/main/res/drawable/custom_accent_bg.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/custom_primaryDark_bg.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/custom_primaryLight_bg.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/custom_primary_bg.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/custom_primary_bluish_bg.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/custom_primary_half_corner_bg.xml" value="0.2609375" />
+        <entry key="app/src/main/res/drawable/custom_primary_light_bg.xml" value="0.2462962962962963" />
+        <entry key="app/src/main/res/drawable/custom_primary_light_half_corner_bg.xml" value="0.2462962962962963" />
         <entry key="app/src/main/res/drawable/custom_primary_outlibe_half_corner_bg.xml" value="0.2609375" />
+        <entry key="app/src/main/res/drawable/custom_primary_outline_bg.xml" value="0.2462962962962963" />
+        <entry key="app/src/main/res/drawable/custom_primary_outline_half_corner_bg.xml" value="0.2462962962962963" />
         <entry key="app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/ic_circle.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/ic_logout.xml" value="0.26458333333333334" />
+        <entry key="app/src/main/res/layout/activity_compare_images.xml" value="0.20380434782608695" />
+        <entry key="app/src/main/res/layout/activity_connect_to_camera.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout/activity_login_page.xml" value="0.2164855072463768" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22780797101449277" />
         <entry key="app/src/main/res/layout/activity_registration_page.xml" value="0.2164855072463768" />
         <entry key="app/src/main/res/layout/activity_result.xml" value="0.22418478260869565" />
+        <entry key="app/src/main/res/layout/activity_subscriptions.xml" value="0.20833333333333334" />
+        <entry key="app/src/main/res/layout/activity_train.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout/custom_loading_dialog.xml" value="0.21240942028985507" />
+        <entry key="app/src/main/res/layout/header_menu.xml" value="0.20833333333333334" />
+        <entry key="app/src/main/res/layout/spinner_item.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/menu/side_menu.xml" value="0.2484375" />
+        <entry key="app/src/main/res/menu/side_menu_bar.xml" value="0.24583333333333332" />
       </map>
     </option>
   </component>

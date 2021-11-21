@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp"
+    android:orientation="vertical"
+    tools:context=".Subscriptions">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Monthly - 299"
+            android:background="@drawable/custom_primary_light_half_corner_bg"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:padding="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/custom_primary_outline_half_corner_bg">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Unlimited DataStorage"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/primaryDark"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Train Model Faster"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/primaryDark"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="High Priority"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/primaryDark"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Validity: 30 days"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/primaryDark"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Yearly - 2999"
+            android:background="@drawable/custom_primary_half_corner_bg"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:padding="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/custom_primary_outline_half_corner_bg">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Unlimited DataStorage"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/primaryDark"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Train Model Faster"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/primaryDark"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="High Priority"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/primaryDark"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Validity: 365 days"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/primaryDark"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Plan Selected"
+                android:background="@drawable/custom_primary_outline_bg"
+                android:layout_marginEnd="10dp"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/primaryDark"
+                android:textSize="20sp"/>
+
+            <Spinner
+                android:id="@+id/spinnerSubscription"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
+                android:textAlignment="center"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:background="@drawable/custom_primary_bg"/>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Make Payment"/>
+
+    </LinearLayout>
+
+</LinearLayout>
