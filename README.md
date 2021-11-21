@@ -51,7 +51,7 @@ Login                      |  Registration             |    Main Page           
 
 ## Team Members
 
-* Dileep Kumar Sharma
+* Dileep Kumar Sharma (Team Leader)
 * Harsha S M
 * Harsha Vardhan
 * Viyandra
